@@ -12,7 +12,7 @@ var PostGenerator = module.exports = function Generator(args, options) {
 util.inherits(PostGenerator, yeoman.generators.Base);
 
 PostGenerator.prototype.askFor = function askFor() {
-	var cb = this.async();
+  var cb = this.async();
 
   var prompts = [{
       name: 'widgetName',
@@ -44,8 +44,11 @@ PostGenerator.prototype.askFor = function askFor() {
     // }
   ];
 
-  this.prompt(prompts, function() {
+  this.prompt(prompts, function(props) {
     // var features = answers.features;
+
+    this.widgetName = props.widgetName;
+    this.widgetType = props.widgetType;
 
     // manually deal with the response, get back and store the results.
     // we change a bit this way of doing to automatically do this in the self.prompt() method.
@@ -60,24 +63,33 @@ PostGenerator.prototype.askFor = function askFor() {
 
 PostGenerator.prototype.html = function html() {
   var today = new Date();
-  var prefix = today.getUTCMonth() + 1;
-  prefix += '-' + today.getDate();
-  prefix += '-' + today.getFullYear();
+  var prefix = today.getFullYear();
+
+  prefix += '-' + ('0' + (today.getUTCMonth() + 1)).slice(-2);
+  prefix += '-' + ('0' + today.getDate()).slice(-2);
 
   if (this.widgetType === 'Full Screen') {
 
-  } else if (this.widgetType === 'Component') {
-    this.template('conditional/component/_component.html', 'app/posts/' + prefix + this.widgetName);
+    this.template('conditional/fullPage/_fullPage.html', 'app/_posts/' + prefix + '-' + this.widgetName + '.html');
 
 
     this.mkdir('app/js/' + this.widgetName);
     this.mkdir('app/_scss/' + this.widgetName);
 
 
-    this.copy('conditional/component/_component.js', 'app/js/' + this.widgetName);
-    this.copy('conditional/component/_component.scss', 'app/_scss/' + this.widgetName);
+    this.copy('conditional/fullPage/_fullPage.js', 'app/js/' + this.widgetName + '/main.js');
+    this.copy('conditional/fullPage/_fullPage.scss', 'app/_scss/' + this.widgetName + '/main.scss');
+
+  } else if (this.widgetType === 'Component') {
+    this.template('conditional/component/_component.html', 'app/_posts/' + prefix + '-' + this.widgetName + '.html');
 
 
+    this.mkdir('app/js/' + this.widgetName);
+    this.mkdir('app/_scss/' + this.widgetName);
+
+
+    this.copy('conditional/component/_component.js', 'app/js/' + this.widgetName + '/main.js');
+    this.copy('conditional/component/_component.scss', 'app/_scss/' + this.widgetName + '/main.scss');
 
   } else {
     console.log('Oops, I haven\'t gotten around to implementing this one yet');
