@@ -1,14 +1,14 @@
 {
   "name": "generator-jekyllrb",
   "description": "Supercharge Jekyll development with Yeoman. Yo, Jekyllrb!",
-  "version": "1.2.1",
-  "homepage": "https://github.com/robwierzbowski/generator-jekyllrb",
+  "version": "1.0",
+  "homepage": "https://github.com/jdivock/generator-jekyllrb",
   "author": "Rob Wierzbowski <hello@robwierzbowski.com> (http://robwierzbowski.com)",
   "repository": {
     "type": "git",
-    "url": "git://github.com/robwierzbowski/generator-jekyllrb.git"
+    "url": "git://github.com/jdivock/generator-jekyllrb.git"
   },
-  "bugs": "https://github.com/robwierzbowski/generator-jekyllrb/issues",
+  "bugs": "https://github.com/jdivock/generator-jekyllrb/issues",
   "licenses": [
     {
       "type": "BSD-new"
