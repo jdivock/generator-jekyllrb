@@ -68,7 +68,7 @@ PostGenerator.prototype.html = function html() {
   prefix += '-' + ('0' + (today.getUTCMonth() + 1)).slice(-2);
   prefix += '-' + ('0' + today.getDate()).slice(-2);
 
-  this.widgetName = this.widgetName.replace(' ', '-');
+  this.widgetName = this.widgetName.replace(/ /g, '-');
 
   if (this.widgetType === 'Full Screen') {
 
